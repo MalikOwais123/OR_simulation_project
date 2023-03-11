@@ -27,7 +27,8 @@ const InputParams = ({
       <Box
         sx={{
           borderRadius: 2,
-          boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+          // boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+          backgroundColor: "#edf5fc",
           padding: 3,
           mb: 5,
         }}
@@ -45,9 +46,6 @@ const InputParams = ({
           value={inputParams.servers}
           onChange={handleInputChange}
         />
-        <Typography sx={{ color: "gray", fontSize: 10 }}>
-          Number of servers in parallel open to attend customers.
-        </Typography>
       </Box>
       <Grid
         container
@@ -55,78 +53,62 @@ const InputParams = ({
         justifyContent="space-evenly"
         backgroundColor="#edf5fc"
         borderRadius={2}
+        spacing={3}
+        mt={2}
       >
         <Grid item md={6}>
-          <Box
-            sx={{
-              borderRadius: 2,
-              padding: 3,
-              mb: 5,
-            }}
-          >
-            <Typography sx={{ fontSize: 20, fontWeight: "bold" }}>
-              Select Inter-Arrival Distribution:
-            </Typography>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Type</InputLabel>
-              <Select
-                margin="normal"
-                fullWidth
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={distribution.arrivalType}
-                label="Type"
-                name="arrivalType"
-                onChange={handleDistributionChange}
-              >
-                <MenuItem value={"exponential"}>Exponential</MenuItem>
-                <MenuItem value={"uniform"}>Uniform</MenuItem>
-                <MenuItem value={"normal"}>Normal</MenuItem>
-                <MenuItem value={"gamma"}>Gamma</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
+          <Typography sx={{ fontSize: 20, fontWeight: "bold", mb: 2 }}>
+            Inter-Arrival Distribution:
+          </Typography>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Type</InputLabel>
+            <Select
+              margin="normal"
+              fullWidth
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={distribution.arrivalType}
+              label="Type"
+              name="arrivalType"
+              onChange={handleDistributionChange}
+            >
+              <MenuItem value={"exponential"}>Exponential</MenuItem>
+              <MenuItem value={"uniform"}>Uniform</MenuItem>
+              <MenuItem value={"normal"}>Normal</MenuItem>
+              <MenuItem value={"gamma"}>Gamma</MenuItem>
+            </Select>
+          </FormControl>
         </Grid>
-        <Grid item md={6}>
-          <Box
-            sx={{
-              borderRadius: 2,
-              padding: 3,
-              mb: 5,
-            }}
-          >
-            <Typography sx={{ fontSize: 20, fontWeight: "bold" }}>
-              Service Distribution:
-            </Typography>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Type</InputLabel>
-              <Select
-                margin="normal"
-                fullWidth
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={distribution.serviceType}
-                label="Type"
-                name="serviceType"
-                onChange={handleDistributionChange}
-              >
-                <MenuItem value={"exponential"}>Exponential</MenuItem>
-                <MenuItem value={"uniform"}>Uniform</MenuItem>
-                <MenuItem value={"normal"}>Normal</MenuItem>
-                <MenuItem value={"gamma"}>Gamma</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
+        <Grid
+          item
+          md={6}
+          sx={{
+            padding: 3,
+          }}
+        >
+          <Typography sx={{ fontSize: 20, fontWeight: "bold", mb: 2 }}>
+            Service Distribution:
+          </Typography>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Type</InputLabel>
+            <Select
+              margin="normal"
+              fullWidth
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={distribution.serviceType}
+              label="Type"
+              name="serviceType"
+              onChange={handleDistributionChange}
+            >
+              <MenuItem value={"exponential"}>Exponential</MenuItem>
+              <MenuItem value={"uniform"}>Uniform</MenuItem>
+              <MenuItem value={"normal"}>Normal</MenuItem>
+              <MenuItem value={"gamma"}>Gamma</MenuItem>
+            </Select>
+          </FormControl>
         </Grid>
-      </Grid>
 
-      <Grid
-        container
-        flexDirection="row"
-        justifyContent="space-evenly"
-        backgroundColor="#edf5fc"
-        borderRadius={2}
-      >
         <Grid md={6}>
           {distribution.arrivalType === "exponential" ? (
             <ExponentialArrival

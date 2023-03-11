@@ -6,13 +6,11 @@ const ExponentialArrival = ({ inputValue, handleInputChange }) => {
   return (
     <Box
       sx={{
-        borderRadius: 2,
         padding: 3,
-        mb: 5,
       }}
     >
       <Typography sx={{ fontSize: 20, fontWeight: "bold" }}>
-        Inter Arrival Time:
+        Arrival Time:
       </Typography>
       <Box mb={2}>
         <TextField

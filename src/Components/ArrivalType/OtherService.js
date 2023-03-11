@@ -6,9 +6,7 @@ const OtherArrival = ({ inputValue, handleInputChange }) => {
   return (
     <Box
       sx={{
-        borderRadius: 2,
         padding: 3,
-        mb: 5,
       }}
     >
       <Typography sx={{ fontSize: 20, fontWeight: "bold" }}>
