@@ -1,13 +1,12 @@
-import Header from './Components/Header'
-import Pages from './Components/Pages'
+import Header from "./Components/Header";
+import PerformanceMeasures from "./Components/PerformanceMeasures";
 
 function App() {
   return (
     <div className="App">
-    <Header/>
-    <Pages/>
+      <Header />
+      <PerformanceMeasures />
     </div>
-    
   );
 }
 
