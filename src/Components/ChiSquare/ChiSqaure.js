@@ -6,7 +6,7 @@ import {
   Typography,
   Grid,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import ShowResult from "./ShowResult";
 import TestTable from "./TestTable";
 
@@ -81,51 +81,48 @@ const calculateChiSquare = (data) => {
 };
 
 const ChiSqaure = () => {
-  console.log("DUMMY DATASET", dataSet);
-
   const DEGREE_OF_FREEDOM = 1;
   const CRITICAL_VALUE = 3.841;
   const ALPHA = 0.05;
-  const total =
-    dataSet.deluxMachine.deluxTotal + dataSet.normalMachine.normalTotal;
-  const deluxPartTimeExpected = getExpectedValue({
-    rowTotal: dataSet.deluxMachine.deluxTotal,
-    columnTotal: dataSet.deluxMachine.partTimeTotal,
-    total,
-  });
-  const deluxFullTimeExpected = getExpectedValue({
-    rowTotal: dataSet.deluxMachine.deluxTotal,
-    columnTotal: dataSet.deluxMachine.fullTimeTotal,
-    total,
-  });
-  const normalPartTimeExpected = getExpectedValue({
-    rowTotal: dataSet.normalMachine.normalTotal,
-    columnTotal: dataSet.normalMachine.partTimeTotal,
-    total,
-  });
-  const normalFullTimeExpected = getExpectedValue({
-    rowTotal: dataSet.normalMachine.normalTotal,
-    columnTotal: dataSet.normalMachine.fullTimeTotal,
-    total,
-  });
+  const [data, setData] = React.useState(dataSet);
+  const [CHI_SQAURE, setCHI_SQAURE] = React.useState(0);
+  console.log("*** state of data ***", data);
 
-  console.log("before dataSet", dataSet);
+  useEffect(() => {
+    // CDM
+    const total = data.deluxMachine.deluxTotal + data.normalMachine.normalTotal;
+    const deluxPartTimeExpected = getExpectedValue({
+      rowTotal: data.deluxMachine.deluxTotal,
+      columnTotal: data.deluxMachine.partTimeTotal,
+      total,
+    });
+    const deluxFullTimeExpected = getExpectedValue({
+      rowTotal: data.deluxMachine.deluxTotal,
+      columnTotal: data.deluxMachine.fullTimeTotal,
+      total,
+    });
+    const normalPartTimeExpected = getExpectedValue({
+      rowTotal: data.normalMachine.normalTotal,
+      columnTotal: data.normalMachine.partTimeTotal,
+      total,
+    });
+    const normalFullTimeExpected = getExpectedValue({
+      rowTotal: data.normalMachine.normalTotal,
+      columnTotal: data.normalMachine.fullTimeTotal,
+      total,
+    });
+    const { deluxChiSqaure, normalChiSqaure, chiSquare } =
+      calculateChiSquare(data);
 
-  const {
-    deluxChiSqaure,
-    normalChiSqaure,
-    chiSquare: CHI_SQAURE,
-  } = calculateChiSquare(dataSet);
-
-  dataSet.deluxMachine.partTimeExpected = deluxPartTimeExpected;
-  dataSet.deluxMachine.fullTimeExpected = deluxFullTimeExpected;
-  dataSet.deluxMachine.chiSquareTotal = deluxChiSqaure;
-  dataSet.normalMachine.partTimeExpected = normalPartTimeExpected;
-  dataSet.normalMachine.fullTimeExpected = normalFullTimeExpected;
-  dataSet.normalMachine.chiSquareTotal = normalChiSqaure;
-
-  console.log("after dataSet", dataSet);
-  console.log("CHI_SQAURE", CHI_SQAURE);
+    dataSet.deluxMachine.partTimeExpected = deluxPartTimeExpected;
+    dataSet.deluxMachine.fullTimeExpected = deluxFullTimeExpected;
+    dataSet.deluxMachine.chiSquareTotal = deluxChiSqaure;
+    dataSet.normalMachine.partTimeExpected = normalPartTimeExpected;
+    dataSet.normalMachine.fullTimeExpected = normalFullTimeExpected;
+    dataSet.normalMachine.chiSquareTotal = normalChiSqaure;
+    setCHI_SQAURE(chiSquare);
+    setData(dataSet);
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
