@@ -4,7 +4,6 @@ import Header from "./Components/Header";
 import PerformanceMeasures from "./Components/PerformanceMeasures";
 import SimulationMeasures from "./Components/SimulationMeasures";
 import SimulationUsingFile from "./Components/SimulationUsingFile";
-import UploadFile from "./Components/UploadFile";
 
 function App() {
   const [value, setValue] = React.useState(0);
