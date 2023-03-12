@@ -4,11 +4,7 @@ import React from "react";
 
 const ExponentialService = ({ inputValue, handleInputChange }) => {
   return (
-    <Box
-      sx={{
-        padding: 3,
-      }}
-    >
+    <Box p={2}>
       <Typography sx={{ fontSize: 20, fontWeight: "bold" }}>
         Service Time:
       </Typography>
