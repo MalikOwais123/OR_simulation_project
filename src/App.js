@@ -3,6 +3,8 @@ import React from "react";
 import Header from "./Components/Header";
 import PerformanceMeasures from "./Components/PerformanceMeasures";
 import SimulationMeasures from "./Components/SimulationMeasures";
+import SimulationUsingFile from "./Components/SimulationUsingFile";
+import UploadFile from "./Components/UploadFile";
 
 function App() {
   const [value, setValue] = React.useState(0);
@@ -22,10 +24,12 @@ function App() {
       >
         <Tab label="Performance Measures" />
         <Tab label="Simulation Measures" />
+        <Tab label="Simulation Using File" />
       </Tabs>
 
       {value === 0 && <PerformanceMeasures />}
       {value === 1 && <SimulationMeasures />}
+      {value === 2 && <SimulationUsingFile />}
     </div>
   );
 }

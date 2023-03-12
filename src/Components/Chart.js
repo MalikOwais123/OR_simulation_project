@@ -10,6 +10,7 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import { Typography } from "@mui/material";
 
 ChartJS.register(
   CategoryScale,
@@ -85,7 +86,21 @@ const getChartData = (simulationMeasures) => {
 const Chart = ({ simulationMeasures }) => {
   const chartData = getChartData(simulationMeasures);
   const chartOptions = getChartOptions(simulationMeasures);
-  return <Line options={chartOptions} data={chartData} />;
+  return (
+    <>
+      <Typography
+        sx={{
+          fontSize: 30,
+          fontWeight: "bold",
+          mt: 3,
+          mb: 3,
+        }}
+      >
+        Queuing Graph
+      </Typography>
+      <Line options={chartOptions} data={chartData} />
+    </>
+  );
 };
 
 export default Chart;

@@ -40,8 +40,6 @@ const PerformanceMeasures = () => {
       minimumServiceTime: minServiceTime,
       maximumServiceTime: maxServiceTime,
     } = inputParams;
-    console.log("inputParams", inputParams);
-    console.log("distribution", distribution);
 
     if (arrivalType === "exponential" && serviceType === "exponential") {
       //* MM Case
