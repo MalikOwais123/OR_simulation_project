@@ -57,7 +57,9 @@ const TestTable = ({ dataSet }) => {
               <TableCell component="th">{row.name}</TableCell>
               <TableCell align="center">{row.fullTimeRM}</TableCell>
               <TableCell align="center">{row.partTimeRM}</TableCell>
-              <TableCell align="center">{truncate(row.chiSquare, 2)}</TableCell>
+              <TableCell align="center">
+                {parseFloat(row.chiSquare).toFixed(2)}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
