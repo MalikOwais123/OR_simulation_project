@@ -15,7 +15,7 @@ const ExponentialService = ({ inputValue, handleInputChange }) => {
           name="serviceTime"
           type="number"
           id="serviceTime"
-          label="Service Time"
+          label="Mean Service Time (μ)"
           value={inputValue.serviceTime}
           onChange={handleInputChange}
         />

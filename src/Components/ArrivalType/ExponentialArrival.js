@@ -15,7 +15,7 @@ const ExponentialArrival = ({ inputValue, handleInputChange }) => {
           name="arrivalTime"
           type="number"
           id="arrivalTime"
-          label="Inter-Arrival Time"
+          label="Mean Inter-Arrival Time (λ)"
           value={inputValue.arrivalTime}
           onChange={handleInputChange}
         />

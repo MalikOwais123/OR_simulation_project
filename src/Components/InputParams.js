@@ -152,14 +152,22 @@ const InputParams = ({
           </Grid>
         </Grid>
 
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         >
-          Calculate
-        </Button>
+          <Button
+            size="medium"
+            type="submit"
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Calculate
+          </Button>
+        </Box>
       </Box>
     </>
   );
