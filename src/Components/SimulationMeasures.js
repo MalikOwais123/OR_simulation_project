@@ -9,6 +9,7 @@ import SimulationTable from "./SimulationComponents/SimulationTable";
 import ResultShow from "./ResultShow";
 import { MM1Computations } from "../helpers/MM1Computations";
 import { MMCComputations } from "../helpers/MMCComputations";
+import Chart from "./Chart";
 
 const theme = createTheme();
 
@@ -75,6 +76,11 @@ const SimulationMeasures = () => {
           <Grid item xs={12}>
             {performanceMeasures && (
               <ResultShow performanceMeasures={performanceMeasures} />
+            )}
+          </Grid>
+          <Grid item xs={12}>
+            {performanceMeasures && simulationMeasures.length > 0 && (
+              <Chart simulationMeasures={simulationMeasures} />
             )}
           </Grid>
         </Grid>

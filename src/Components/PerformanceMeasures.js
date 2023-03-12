@@ -40,14 +40,17 @@ const PerformanceMeasures = () => {
       minimumServiceTime: minServiceTime,
       maximumServiceTime: maxServiceTime,
     } = inputParams;
+    console.log("inputParams", inputParams);
+    console.log("distribution", distribution);
 
     if (arrivalType === "exponential" && serviceType === "exponential") {
       //* MM Case
       // *** MM1 Computations
-      if (servers === 1) {
+      if (Number(servers) === 1) {
+        console.log("MM1 Computations");
         const result = MM1Computations(Number(lambda), Number(meu));
         setPerformanceMeasures(result);
-      } else if (servers > 1) {
+      } else if (Number(servers) > 1) {
         //* MMC Computations
         const result = MMCComputations(
           Number(lambda),
@@ -56,10 +59,10 @@ const PerformanceMeasures = () => {
         );
         setPerformanceMeasures(result);
       }
-    } else if (arrivalType === "exponential" && serviceType === "other") {
+    } else if (arrivalType === "exponential" && serviceType !== "exponential") {
       //* MG Case
       // *** MG1Computations
-      if (servers === 1) {
+      if (Number(servers) === 1) {
         const result = MG1Computations(
           Number(lambda),
           Number(minServiceTime),
@@ -67,10 +70,10 @@ const PerformanceMeasures = () => {
         );
         setPerformanceMeasures(result);
       }
-    } else if (arrivalType === "other" && serviceType === "other") {
+    } else if (arrivalType !== "exponential" && serviceType !== "exponential") {
       //* GGC Case
       // *** GG1 Computations
-      if (servers === 1) {
+      if (Number(servers) === 1) {
         const result = MMCComputations(
           Number(minArrivalTime),
           Number(maxArrivalTime),
@@ -79,7 +82,7 @@ const PerformanceMeasures = () => {
           Number(servers)
         );
         setPerformanceMeasures(result);
-      } else if (servers > 1) {
+      } else if (Number(servers) > 1) {
         const result = GGCComputations(
           Number(minArrivalTime),
           Number(maxArrivalTime),

@@ -18,40 +18,40 @@ const ResultShow = ({ performanceMeasures }) => {
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <ResultTile
-            symbol="L"
-            title="Average Customers in System"
-            value={performanceMeasures.l}
-            color="purple"
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <ResultTile
             symbol="Lq"
-            title="Average Customers in Queue"
+            title="Avg Length of the Queue"
             value={performanceMeasures.lq}
             color="skyblue"
           />
         </Grid>
         <Grid item xs={6}>
           <ResultTile
-            symbol="W"
-            title="Average Time Spent in System"
-            value={performanceMeasures.w}
-            color="green"
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <ResultTile
             symbol="Wq"
-            title="Average Time Waiting in Line"
+            title="Avg Wait Time of the Queue"
             value={performanceMeasures.wq}
             color="red"
           />
         </Grid>
         <Grid item xs={6}>
           <ResultTile
-            symbol="P0"
-            title="Server Utilization"
+            symbol="L"
+            title="Avg Length of the System"
+            value={performanceMeasures.l}
+            color="purple"
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <ResultTile
+            symbol="W"
+            title="Avg Wait Time in the System"
+            value={performanceMeasures.w}
+            color="green"
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <ResultTile
+            symbol="idle"
+            title="Idle Time"
             value={performanceMeasures.idle}
             color="orange"
           />
