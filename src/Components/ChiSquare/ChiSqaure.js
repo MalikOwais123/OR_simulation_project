@@ -81,6 +81,8 @@ const calculateChiSquare = (data) => {
 };
 
 const ChiSqaure = () => {
+  console.log("DUMMY DATASET", dataSet);
+
   const DEGREE_OF_FREEDOM = 1;
   const CRITICAL_VALUE = 3.841;
   const ALPHA = 0.05;
