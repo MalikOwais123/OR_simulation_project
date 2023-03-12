@@ -8,10 +8,11 @@ import {
   TableBody,
   Table,
 } from "@mui/material";
+import { truncate } from "./ChiSqaure";
 
 const TestTable = ({ dataSet }) => {
-  function createData(name, fullTimeRM, partTimeRM, total) {
-    return { name, fullTimeRM, partTimeRM, total };
+  function createData(name, fullTimeRM, partTimeRM, chiSquare, total) {
+    return { name, fullTimeRM, partTimeRM, chiSquare, total };
   }
 
   const rows = [
@@ -19,14 +20,14 @@ const TestTable = ({ dataSet }) => {
       "Delux Machines",
       dataSet.deluxMachine.fullTimeActual,
       dataSet.deluxMachine.partTimeActual,
-      dataSet.deluxMachine.deluxTotal
+      dataSet.deluxMachine.chiSquareTotal
     ),
 
     createData(
       "Normal Machines",
       dataSet.normalMachine.partTimeActual,
       dataSet.normalMachine.fullTimeActual,
-      dataSet.normalMachine.normalTotal
+      dataSet.normalMachine.chiSquareTotal
     ),
     createData(
       "Total",
@@ -34,7 +35,7 @@ const TestTable = ({ dataSet }) => {
         dataSet.normalMachine.partTimeActual,
       dataSet.deluxMachine.fullTimeActual +
         dataSet.normalMachine.fullTimeActual,
-      dataSet.deluxMachine.fullTimeTotal + dataSet.deluxMachine.partTimeTotal
+      dataSet.deluxMachine.chiSquareTotal + dataSet.normalMachine.chiSquareTotal
     ),
   ];
 
@@ -47,7 +48,7 @@ const TestTable = ({ dataSet }) => {
             <TableCell />
             <TableCell align="center">Full Time RM</TableCell>
             <TableCell align="center">Break Down RM</TableCell>
-            <TableCell align="center">Total</TableCell>
+            <TableCell align="center">Chi - Sqaure</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -56,7 +57,7 @@ const TestTable = ({ dataSet }) => {
               <TableCell component="th">{row.name}</TableCell>
               <TableCell align="center">{row.fullTimeRM}</TableCell>
               <TableCell align="center">{row.partTimeRM}</TableCell>
-              <TableCell align="center">{row.total}</TableCell>
+              <TableCell align="center">{truncate(row.chiSquare, 2)}</TableCell>
             </TableRow>
           ))}
         </TableBody>

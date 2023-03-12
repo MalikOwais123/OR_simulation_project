@@ -27,6 +27,7 @@ let dataSet = {
     fullTimeActual: 70,
     partTimeExpected: 0,
     fullTimeExpected: 0,
+    chiSquareTotal: 0,
     deluxTotal: 120,
     partTimeTotal: 170,
     fullTimeTotal: 120,
@@ -36,6 +37,7 @@ let dataSet = {
     fullTimeActual: 50,
     partTimeExpected: 0,
     fullTimeExpected: 0,
+    chiSquareTotal: 0,
     normalTotal: 170,
     partTimeTotal: 170,
     fullTimeTotal: 120,
@@ -48,7 +50,7 @@ const getExpectedValue = (data) => {
   return truncate(result, 2);
 };
 
-const truncate = (num, decimalPlaces) => {
+export const truncate = (num, decimalPlaces) => {
   return parseFloat(num.toFixed(decimalPlaces));
 };
 
@@ -71,7 +73,11 @@ const calculateChiSquare = (data) => {
     deluxFullTimeChiSquare +
     normalPartTimeChiSquare +
     normalFullTimeChiSquare;
-  return chiSquare;
+  return {
+    deluxChiSqaure: deluxPartTimeChiSquare + deluxFullTimeChiSquare,
+    normalChiSqaure: normalPartTimeChiSquare + normalFullTimeChiSquare,
+    chiSquare,
+  };
 };
 
 const ChiSqaure = () => {
@@ -101,12 +107,18 @@ const ChiSqaure = () => {
     total,
   });
 
+  const {
+    deluxChiSqaure,
+    normalChiSqaure,
+    chiSquare: CHI_SQAURE,
+  } = calculateChiSquare(dataSet);
+
   dataSet.deluxMachine.partTimeExpected = deluxPartTimeExpected;
   dataSet.deluxMachine.fullTimeExpected = deluxFullTimeExpected;
+  dataSet.deluxMachine.chiSquareTotal = deluxChiSqaure;
   dataSet.normalMachine.partTimeExpected = normalPartTimeExpected;
   dataSet.normalMachine.fullTimeExpected = normalFullTimeExpected;
-
-  const CHI_SQAURE = truncate(calculateChiSquare(dataSet), 3);
+  dataSet.normalMachine.chiSquareTotal = normalChiSqaure;
 
   return (
     <ThemeProvider theme={theme}>
