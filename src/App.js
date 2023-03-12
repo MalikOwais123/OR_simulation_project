@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      {/* <PerformanceMeasures /> */}
+      <PerformanceMeasures />
       <SimulationMeasures />
     </div>
   );

@@ -5,7 +5,10 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { simulationFormulas } from "../helpers/SimulationFormulas";
 import SimulationParams from "./SimulationParams";
-import TempTable from "./SimulationComponents/TempTable";
+import SimulationTable from "./SimulationComponents/SimulationTable";
+import ResultShow from "./ResultShow";
+import { MM1Computations } from "../helpers/MM1Computations";
+import { MMCComputations } from "../helpers/MMCComputations";
 
 const theme = createTheme();
 
@@ -16,25 +19,35 @@ const SimulationMeasures = () => {
     serviceTime: 0,
     servers: 0,
   });
-  const [performanceMeasures, setPerformanceMeasures] = useState([]);
+  const [simulationMeasures, setSimulationMeasures] = useState([]);
+  const [performanceMeasures, setPerformanceMeasures] = useState(null);
 
   const handleSubmit = async (event) => {
     setIsLoading(true);
     event.preventDefault();
-    const { arrivalTime: lambda, serviceTime: meu, servers } = inputParams;
-    const interArrivals = simulationFormulas.commulativeFrequencyGenerate(
-      Number(lambda)
-    );
+    const { arrivalTime, serviceTime, servers } = inputParams;
+    const lambda = Number(arrivalTime);
+    const meu = Number(serviceTime);
+    const noOfServers = Number(servers);
+    const interArrivals =
+      simulationFormulas.commulativeFrequencyGenerate(lambda);
     const serviceTimes = await simulationFormulas.calculateServiceTimes(
       interArrivals,
-      Number(meu)
+      meu
     );
-    const result = simulationFormulas.generateSimulation(
+    const simulationResult = simulationFormulas.generateSimulation(
       interArrivals,
       serviceTimes,
-      Number(servers)
+      noOfServers
     );
-    setPerformanceMeasures(result);
+    let performanceResult = null;
+    if (noOfServers === 1) {
+      performanceResult = MM1Computations(lambda, meu);
+    } else if (noOfServers > 1) {
+      performanceResult = MMCComputations(lambda, meu, noOfServers);
+    }
+    setPerformanceMeasures(performanceResult);
+    setSimulationMeasures(simulationResult);
     setIsLoading(false);
   };
 
@@ -57,7 +70,12 @@ const SimulationMeasures = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <TempTable isLoading={isLoading} data={performanceMeasures} />
+            <SimulationTable isLoading={isLoading} data={simulationMeasures} />
+          </Grid>
+          <Grid item xs={12}>
+            {performanceMeasures && (
+              <ResultShow performanceMeasures={performanceMeasures} />
+            )}
           </Grid>
         </Grid>
       </Container>
