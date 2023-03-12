@@ -84,6 +84,7 @@ const ChiSqaure = () => {
   const DEGREE_OF_FREEDOM = 1;
   const CRITICAL_VALUE = 3.841;
   const ALPHA = 0.05;
+  let CHI_SQAURE = 0;
 
   const total =
     dataSet.deluxMachine.deluxTotal + dataSet.normalMachine.normalTotal;
@@ -114,15 +115,13 @@ const ChiSqaure = () => {
   dataSet.deluxMachine.fullTimeExpected = deluxFullTimeExpected;
   dataSet.normalMachine.partTimeExpected = normalPartTimeExpected;
   dataSet.normalMachine.fullTimeExpected = normalFullTimeExpected;
-  const {
-    deluxChiSqaure,
-    normalChiSqaure,
-    chiSquare: CHI_SQAURE,
-  } = calculateChiSquare(dataSet);
+  const { deluxChiSqaure, normalChiSqaure, chiSquare } =
+    calculateChiSquare(dataSet);
 
   // MODIFIED CHI SQAURE VALUES
   dataSet.deluxMachine.chiSquareTotal = deluxChiSqaure;
   dataSet.normalMachine.chiSquareTotal = normalChiSqaure;
+  CHI_SQAURE = parseFloat(chiSquare.toFixed(2));
 
   return (
     <ThemeProvider theme={theme}>
