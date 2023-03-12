@@ -107,6 +107,8 @@ const ChiSqaure = () => {
     total,
   });
 
+  console.log("before dataSet", dataSet);
+
   const {
     deluxChiSqaure,
     normalChiSqaure,
@@ -120,7 +122,7 @@ const ChiSqaure = () => {
   dataSet.normalMachine.fullTimeExpected = normalFullTimeExpected;
   dataSet.normalMachine.chiSquareTotal = normalChiSqaure;
 
-  console.log("dataSet", dataSet);
+  console.log("after dataSet", dataSet);
   console.log("CHI_SQAURE", CHI_SQAURE);
 
   return (
