@@ -116,7 +116,9 @@ const InputParams = ({
                 name="serviceType"
                 onChange={handleDistributionChange}
               >
-                <MenuItem value={"exponential"}>Exponential</MenuItem>
+                {distribution.arrivalType === "exponential" && (
+                  <MenuItem value={"exponential"}>Exponential</MenuItem>
+                )}
                 <MenuItem value={"uniform"}>Uniform</MenuItem>
                 <MenuItem value={"normal"}>Normal</MenuItem>
                 <MenuItem value={"gamma"}>Gamma</MenuItem>
@@ -125,7 +127,8 @@ const InputParams = ({
           </Grid>
 
           <Grid md={6}>
-            {distribution.arrivalType === "exponential" ? (
+            {distribution.arrivalType === "exponential" ||
+            !distribution.arrivalType ? (
               <ExponentialArrival
                 inputValue={inputParams}
                 handleInputChange={handleInputChange}
@@ -138,7 +141,8 @@ const InputParams = ({
             )}
           </Grid>
           <Grid md={6}>
-            {distribution.serviceType === "exponential" ? (
+            {distribution.serviceType === "exponential" ||
+            !distribution.serviceType ? (
               <ExponentialService
                 inputValue={inputParams}
                 handleInputChange={handleInputChange}

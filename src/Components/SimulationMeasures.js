@@ -10,10 +10,12 @@ import ResultShow from "./ResultShow";
 import { MM1Computations } from "../helpers/MM1Computations";
 import { MMCComputations } from "../helpers/MMCComputations";
 import Chart from "./Chart";
+import { Alert, Snackbar } from "@mui/material";
 
 const theme = createTheme();
 
 const SimulationMeasures = () => {
+  const [openAlert, setOpenAlert] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [inputParams, setInputParams] = useState({
     arrivalTime: 0,
@@ -23,10 +25,21 @@ const SimulationMeasures = () => {
   const [simulationMeasures, setSimulationMeasures] = useState([]);
   const [performanceMeasures, setPerformanceMeasures] = useState(null);
 
+  const checkIsAllParamsValid = ({ arrivalTime, serviceTime, servers }) => {
+    if (arrivalTime === 0 || serviceTime === 0 || servers === 0) {
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (event) => {
-    setIsLoading(true);
     event.preventDefault();
+    if (!checkIsAllParamsValid(inputParams)) {
+      setOpenAlert(true);
+      return;
+    }
     const { arrivalTime, serviceTime, servers } = inputParams;
+    setIsLoading(true);
     const lambda = Number(arrivalTime);
     const meu = Number(serviceTime);
     const noOfServers = Number(servers);
@@ -61,6 +74,20 @@ const SimulationMeasures = () => {
     <ThemeProvider theme={theme}>
       <Container component="main">
         <CssBaseline />
+        <Snackbar
+          open={openAlert}
+          autoHideDuration={4000}
+          onClose={() => setOpenAlert(false)}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert
+            onClose={() => setOpenAlert(false)}
+            severity="error"
+            sx={{ width: "100%" }}
+          >
+            Please fill all the fields before submitting
+          </Alert>
+        </Snackbar>
         <Grid container spacing={3} mt={3}>
           <Grid item xs={12}>
             <SimulationParams

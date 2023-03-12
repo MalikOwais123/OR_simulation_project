@@ -9,13 +9,15 @@ import { MG1Computations } from "../helpers/MG1Computations";
 import { GGCComputations } from "../helpers/GGCComputations";
 import InputParams from "./InputParams";
 import ResultShow from "./ResultShow";
+import { Alert, Snackbar } from "@mui/material";
 
 const theme = createTheme();
 
 const PerformanceMeasures = () => {
+  const [openAlert, setOpenAlert] = useState(false);
   const [distribution, setDistribution] = useState({
-    arrivalType: "exponential",
-    serviceType: "exponential",
+    arrivalType: "",
+    serviceType: "",
   });
   const [inputParams, setInputParams] = useState({
     arrivalTime: 0,
@@ -45,7 +47,6 @@ const PerformanceMeasures = () => {
       //* MM Case
       // *** MM1 Computations
       if (Number(servers) === 1) {
-        console.log("MM1 Computations");
         const result = MM1Computations(Number(lambda), Number(meu));
         setPerformanceMeasures(result);
       } else if (Number(servers) > 1) {
@@ -107,6 +108,20 @@ const PerformanceMeasures = () => {
     <ThemeProvider theme={theme}>
       <Container component="main">
         <CssBaseline />
+        <Snackbar
+          open={openAlert}
+          autoHideDuration={4000}
+          onClose={() => setOpenAlert(false)}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert
+            onClose={() => setOpenAlert(false)}
+            severity="error"
+            sx={{ width: "100%" }}
+          >
+            Please fill all the fields before submitting
+          </Alert>
+        </Snackbar>
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <InputParams

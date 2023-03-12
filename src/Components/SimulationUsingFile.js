@@ -14,6 +14,7 @@ import * as XLSX from "xlsx";
 import { simulationFormulas } from "../helpers/SimulationFormulas";
 import SimulationTable from "./SimulationComponents/SimulationTable";
 import Chart from "./Chart";
+import { Alert, Snackbar } from "@mui/material";
 
 const readExcelFile = (file) => {
   const promise = new Promise((resolve, reject) => {
@@ -62,7 +63,7 @@ const readExcelFile = (file) => {
 const theme = createTheme();
 
 const SimulationUsingFile = () => {
-  const [distributionData, setDistributionData] = useState(null);
+  const [openAlert, setOpenAlert] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const [inputParams, setInputParams] = useState({
@@ -74,6 +75,10 @@ const SimulationUsingFile = () => {
   const [simulationMeasures, setSimulationMeasures] = useState([]);
 
   const handleSubmit = async (event, file) => {
+    if (!file) {
+      setOpenAlert(true);
+      return;
+    }
     setIsLoading(true);
     event.preventDefault();
     const { dataLength, interArrival, serviceTime } = await readExcelFile(file);
@@ -102,6 +107,20 @@ const SimulationUsingFile = () => {
     <ThemeProvider theme={theme}>
       <Container component="main">
         <CssBaseline />
+        <Snackbar
+          open={openAlert}
+          autoHideDuration={4000}
+          onClose={() => setOpenAlert(false)}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert
+            onClose={() => setOpenAlert(false)}
+            severity="error"
+            sx={{ width: "100%" }}
+          >
+            Please choose a file
+          </Alert>
+        </Snackbar>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <UploadFile isLoading={isLoading} handleCalculate={handleSubmit} />

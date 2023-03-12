@@ -1,5 +1,6 @@
 import { Tab, Tabs } from "@mui/material";
 import React from "react";
+import ChiSqaure from "./Components/ChiSquare/ChiSqaure";
 import Header from "./Components/Header";
 import PerformanceMeasures from "./Components/PerformanceMeasures";
 import SimulationMeasures from "./Components/SimulationMeasures";
@@ -24,11 +25,13 @@ function App() {
         <Tab label="Performance Measures" />
         <Tab label="Simulation Measures" />
         <Tab label="Simulation Using File" />
+        <Tab label="Chi-Square Test" />
       </Tabs>
 
       {value === 0 && <PerformanceMeasures />}
       {value === 1 && <SimulationMeasures />}
       {value === 2 && <SimulationUsingFile />}
+      {value === 3 && <ChiSqaure />}
     </div>
   );
 }
