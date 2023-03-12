@@ -50,7 +50,7 @@ const getExpectedValue = (data) => {
   return truncate(result, 2);
 };
 
-export const truncate = (num, decimalPlaces) => {
+const truncate = (num, decimalPlaces) => {
   return parseFloat(num.toFixed(decimalPlaces));
 };
 
@@ -119,6 +119,9 @@ const ChiSqaure = () => {
   dataSet.normalMachine.partTimeExpected = normalPartTimeExpected;
   dataSet.normalMachine.fullTimeExpected = normalFullTimeExpected;
   dataSet.normalMachine.chiSquareTotal = normalChiSqaure;
+
+  console.log("dataSet", dataSet);
+  console.log("CHI_SQAURE", CHI_SQAURE);
 
   return (
     <ThemeProvider theme={theme}>

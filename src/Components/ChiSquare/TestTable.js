@@ -8,7 +8,6 @@ import {
   TableBody,
   Table,
 } from "@mui/material";
-import { truncate } from "./ChiSqaure";
 
 const TestTable = ({ dataSet }) => {
   function createData(name, fullTimeRM, partTimeRM, chiSquare, total) {
