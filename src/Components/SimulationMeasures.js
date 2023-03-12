@@ -71,7 +71,12 @@ const SimulationMeasures = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <SimulationTable isLoading={isLoading} data={simulationMeasures} />
+            {simulationMeasures.length > 1 && (
+              <SimulationTable
+                isLoading={isLoading}
+                data={simulationMeasures}
+              />
+            )}
           </Grid>
           <Grid item xs={12}>
             {performanceMeasures && (
